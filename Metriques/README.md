@@ -10,7 +10,6 @@ Comparaison de 4 métriques de distance (euclidienne, manhattan, chebyshev, mink
 En 1D (X seul), toutes les métriques de distance sont mathématiquement équivalentes,la distance entre deux points reste `|x2 - x1|`, quelle que soit la formule utilisée. C'est seulement en 2D (X, Y) que les différentes métriques divergent réellement et produisent des clusters différents :
 
 | Métrique | Forme de cluster favorisée |
-|------|
 | `euclidean` |
 | `manhattan` |
 | `chebyshev` (L-∞) |
@@ -30,7 +29,6 @@ python3 cascade_metriques.py ../json_bm/243_with_BM.json
 
 ### Paramètre
 | Paramètre | Rôle |
-|---|---|
 | `fichier_json` | Chemin du fichier `*_with_BM.json` du scripteur à analyser |
 
 `min_samples` est fixé volontairement à `5` pour les deux passes (choix assumé, pas un paramètre exposé en ligne de commande).
