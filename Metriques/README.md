@@ -1,4 +1,4 @@
-# metriques/
+# metriques
 
 Comparaison de 4 métriques de distance (euclidienne, manhattan, chebyshev, minkowski p=3) pour la passe 2 de la cascade DBSCAN,celle qui détecte les mots à partir de l'espace (X, Y).
 
@@ -28,7 +28,7 @@ python3 cascade_metriques.py ../json_bm/243_with_BM.json
 ```
 
 ### Paramètre
-| Paramètre | Rôle |
+| Paramètre 
 | `fichier_json` | Chemin du fichier `*_with_BM.json` du scripteur à analyser |
 
 `min_samples` est fixé volontairement à `5` pour les deux passes (choix assumé, pas un paramètre exposé en ligne de commande).
