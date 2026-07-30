@@ -46,8 +46,8 @@ Pour l'ensemble des 4 métriques :
 
 ### Logique interne (résumé)
 
-1. **Passe 1** : DBSCAN sur Y seul (toujours euclidienne, car en 1D) → détection des lignes
-2. **Passe 2** : pour chaque métrique, DBSCAN sur (X, Y) → détection des mots, avec une recherche en grille grossière puis un zoom autour du meilleur point
+1. **Passe 1** : DBSCAN sur Y seul (toujours euclidienne, car en 1D) -> détection des lignes
+2. **Passe 2** : pour chaque métrique, DBSCAN sur (X, Y) -> détection des mots, avec une recherche en grille grossière puis un zoom autour du meilleur point
 3. Comparaison des 4 ARI obtenus, la meilleure métrique est retenue pour les figures de visualisation finales
 
 ### État connu du script
