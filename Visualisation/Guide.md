@@ -14,7 +14,7 @@ La structure interne diffère en conséquence : `json_bm`/`modified` contiennent
 
 ## Les scripts, dans l'ordre de leur rôle
 
-### 1. `JSON_show_first_stroke_of_txt.py` — le plus élémentaire
+### 1. `JSON_show_first_stroke_of_txt.py`: le plus élémentaire
 
 **Portée** : un seul fichier, un seul scripteur (203).
 
@@ -22,7 +22,7 @@ Charge `203_with_BM.json`, prend `data[0]["Points"]`, trace une ligne noire cont
 
 **Le bug fondateur.** `data[0]` ne désigne que le premier élément de la liste `data`, c'est-à-dire le premier segment annoté, pas l'ensemble du texte. Le commentaire laissé dans ce script (« la faute venait de ça ») marque le moment où cette confusion a été identifiée : le nombre de points affiché était trop petit parce que seul le premier trait du scripteur était lu, le reste du document ignoré silencieusement.
 
-### 2. `counter.py` — comptage et vérification de structure
+### 2. `counter.py`: comptage et vérification de structure
 
 **Portée** : un seul scripteur (203), mais deux dossiers comparés.
 
@@ -30,17 +30,17 @@ Compte, pour le scripteur 203, le nombre d'occurrences de chaque label `BM` dans
 
 C'est ce script qui a permis de confirmer que `rangement` n'organise pas ses données de la même façon que `json_bm`.
 
-### 3. `lire_le_dossier_JSON_automatiquement.py` — comparaison et tracé simple
+### 3. `lire_le_dossier_JSON_automatiquement.py`: comparaison et tracé simple
 
 **Portée** : les trois dossiers entiers, tous les scripteurs qu'ils contiennent.
 
 Liste les scripteurs présents dans chaque dossier à partir du nom de fichier, puis calcule les ensembles utiles par comparaison (communs, exclusifs à un dossier). Trace ensuite, pour chaque fichier de chaque dossier, une ligne noire unique. Gère deux structures possibles avec un `try/except`, mais hérite du bug du script précédent : pour les dossiers structurés en segments, seul le premier segment est tracé.
 
-### 4. `lire_tous_les_textes.py` — comparaison et tracé coloré par mot
+### 4. `lire_tous_les_textes.py`: comparaison et tracé coloré par mot
 
 **Portée** : les trois dossiers entiers, tous les scripteurs.
 
-Reprend l'objectif du script précédent, avec deux différences. La comparaison des dossiers est réécrite avec des listes plutôt qu'un dictionnaire. Surtout, le tracé boucle sur chaque segment du fichier et attribue une couleur hexadécimale aléatoire à chaque segment — ce qui corrige le bug des deux scripts précédents et répond à l'objectif recherché : visualiser chaque mot annoté dans une couleur distincte.
+Reprend l'objectif du script précédent, avec deux différences. La comparaison des dossiers est réécrite avec des listes plutôt qu'un dictionnaire. Surtout, le tracé boucle sur chaque segment du fichier et attribue une couleur hexadécimale aléatoire à chaque segment , ce qui corrige le bug des deux scripts précédents et répond à l'objectif recherché : visualiser chaque mot annoté dans une couleur distincte.
 
 **Un bug d'affichage à corriger.** Dans le bloc de comparaison, deux lignes consécutives annoncent un décompte puis une liste qui ne correspondent pas l'un à l'autre :
 
@@ -51,7 +51,7 @@ print(f"Seulement dans modified     ({len(mod-bm)})  : {sorted(bm - mod, key=int
 
 La seconde ligne affiche un compte calculé sur `mod - bm`, mais liste ensuite les éléments de `bm - mod`, l'ensemble inverse.
 
-### 5. `tester_rangement.py` — statistique du nombre de traits par mot
+### 5. `tester_rangement.py`: statistique du nombre de traits par mot
 
 **Portée** : le dossier `rangement` dans son ensemble, tous mots et tous scripteurs confondus.
 
@@ -59,17 +59,17 @@ Contrairement aux scripts précédents, l'organisation de `rangement` n'est pas 
 
 Sert à mesurer la variabilité du nombre de traits utilisés pour écrire un même mot d'un scripteur à l'autre, utile pour calibrer les hyperparamètres des scripts de segmentation automatique (`grille_1d.py`, `grille_2d.py`).
 
-### 6. `tracer_parasites.py` — inspection des traits marqués ponctuation
+### 6. `tracer_parasites.py`: inspection des traits marqués ponctuation
 
 **Portée** : un seul scripteur (203).
 
 Isole et trace uniquement les segments marqués `BM == "P"` (la convention du dépôt pour la ponctuation), pour inspecter visuellement à quoi ressemblent ces traits avant de les filtrer du reste du pipeline.
 
-**Ce que la figure révèle.** Les traits `"P"` ne sont pas concentrés à un seul endroit du texte : ils apparaissent dispersés à des positions variées, avec des tailles très différentes (certains ne sont qu'un point isolé, d'autres de courts traits courbes). Cette dispersion suggère que `BM == "P"` capture un mélange de vraie ponctuation et de bruit d'acquisition (micro-gestes du stylet, hésitations), pas seulement les signes de ponctuation attendus — à garder en tête avant de filtrer ces segments sans les avoir inspectés, puisque le filtre `BM != "P"` est utilisé systématiquement dans tous les scripts `grille_*.py`.
+**Ce que la figure révèle.** Les traits `"P"` ne sont pas concentrés à un seul endroit du texte : ils apparaissent dispersés à des positions variées, avec des tailles très différentes (certains ne sont qu'un point isolé, d'autres de courts traits courbes). Cette dispersion suggère que `BM == "P"` capture un mélange de vraie ponctuation et de bruit d'acquisition (micro-gestes du stylet, hésitations), pas seulement les signes de ponctuation attendus , à garder en tête avant de filtrer ces segments sans les avoir inspectés, puisque le filtre `BM != "P"` est utilisé systématiquement dans tous les scripts `grille_*.py`.
 
 Détail technique : ce script est le seul du groupe à utiliser `plt.gca().invert_yaxis()` (nécessaire car l'axe Y de la tablette compte de haut en bas). Les autres scripts de tracé ne l'utilisent pas — à harmoniser si les figures doivent être comparées entre elles.
 
-### 7. `tracer_txt.py` — tracé d'un résultat déjà segmenté
+### 7. `tracer_txt.py` : tracé d'un résultat déjà segmenté
 
 **Portée** : un seul fichier, déjà issu d'un clustering.
 
