@@ -2,7 +2,7 @@
 
 Interface de classification non supervisée (DBSCAN) pour la segmentation d'écriture manuscrite en ligne, exploration du paramètre eps. Stage de M1 (M1 Mathématiques Appliquées) au **LJK (Laboratoire Jean Kuntzmann)** et la **police scientifique de Lyon**.
 
-**Site vitrine :** `https://TON-USERNAME.github.io/segmentation-manuscrite/`
+**Site vitrine :** 
 
 ---
 
@@ -15,8 +15,7 @@ Interface de classification non supervisée (DBSCAN) pour la segmentation d'écr
 | `grille2d/` | Recherche en grille 2D |
 | `src/` | Scripts cœur : `create_bm`, `functions_comparison`, `plot_json_bm`, `plot_mot`, `test_functions` |
 | `docs/` | Guides utilisateur (Windows/macOS/Linux), notes sur la dimension temporelle |
-| `data/` | `rangement/`, `BM200/`, `modified/`-fichiers JSON de tracés stylet par scripteur |
-| `assets/`, `index.html` | Page vitrine (GitHub Pages) |
+| `data/` | `rangement/`, `json_bm/`, `modified/`-fichiers JSON de tracés stylet par scripteur |
 
 > Les dossiers `data/rangement/`, `data/BM200/` et `data/modified/` contiennent les tracés complets de scripteurs identifiés. 
 
