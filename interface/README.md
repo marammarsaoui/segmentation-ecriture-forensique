@@ -43,9 +43,9 @@ Le guide utilisateur complet est dans [`docs/guide_utilisateur.md`](docs/guide_u
 ##Méthode
 
 Pipeline DBSCAN à deux passes :
-1. **Passe 1 (Y)** — détection des lignes d'écriture
-2. **Passe 2 (X)** — détection des mots à l'intérieur de chaque ligne
-3. **Switch temporel** (`cascade_XN`) — activé si l'ARI spatial descend sous 0,80
+1. **Passe 1 (Y)**: détection des lignes d'écriture
+2. **Passe 2 (X)**: détection des mots à l'intérieur de chaque ligne
+3. **Switch temporel** (`cascade_XN`): activé si l'ARI spatial descend sous 0,80
 
 Résultat : ARI moyen de .
 
