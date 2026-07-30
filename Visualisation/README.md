@@ -14,7 +14,7 @@ Ce dossier regroupe les scripts utilisés pour lire les fichiers JSON de tracé 
 | `tracer_parasites.py` | Inspection des traits marqués comme ponctuation |
 | `tracer_txt.py` | Tracé d'un résultat déjà segmenté |
 
-Le détail de chaque script (entrées, sorties, points critiques) est dans [`GUIDE.md`](./GUIDE.md).
+Le détail de chaque script (entrées, sorties, points critiques) est dans [`GUIDE.md`](./Guide.md).
 
 ## Aperçu
 
@@ -27,7 +27,7 @@ Le détail de chaque script (entrées, sorties, points critiques) est dans [`GUI
 
 ## Ce que ce dossier montre
 
-**Une démarche itérative, pas un résultat figé du premier coup.** Le tout premier script (`JSON_show_first_stroke_of_txt.py`) contenait un bug de portée : `data[0]["Points"]` ne lisait que le premier trait du fichier, pas le texte entier. Ce bug, une fois identifié, a été corrigé dans les scripts suivants — la trace de cette évolution est volontairement conservée plutôt qu'effacée, voir [`GUIDE.md`](./GUIDE.md) pour le détail.
+**Une démarche itérative, pas un résultat figé du premier coup.** Le tout premier script (`JSON_show_first_stroke_of_txt.py`) contenait un bug de portée : `data[0]["Points"]` ne lisait que le premier trait du fichier, pas le texte entier. Ce bug, une fois identifié, a été corrigé dans les scripts suivants — la trace de cette évolution est volontairement conservée plutôt qu'effacée, voir [`GUIDE.md`](./Guide.md) pour le détail.
 
 **Une vérification honnête plutôt qu'une hypothèse non testée.** `tracer_parasites.py` a permis de visualiser les segments filtrés comme « ponctuation » avant de les exclure du pipeline — et a révélé qu'ils ne sont pas concentrés à un seul endroit du texte, ce qui interroge sur ce que ce filtre écarte réellement.
 
@@ -43,4 +43,4 @@ Chaque script se lance indépendamment :
 python3 lire_tous_les_textes.py
 ```
 
-Certains scripts attendent un chemin relatif spécifique (`../json_bm/`, `../rangement/`) : voir [`GUIDE.md`](./GUIDE.md) pour l'organisation de dossiers attendue.
+Certains scripts attendent un chemin relatif spécifique (`../json_bm/`, `../rangement/`) : voir [`GUIDE.md`](./Guide.md) pour l'organisation de dossiers attendue.
