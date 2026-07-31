@@ -6,7 +6,7 @@ Une interface Streamlit qui applique en temps réel la cascade DBSCAN sur un tex
 
 Un seul fichier, `interface_eps.py`, autonome. Elle détecte automatiquement si le fichier chargé contient une vérité terrain (champ `BM`) ou non, et adapte tout son comportement en conséquence :
 
-- **Avec vérité terrain** : cascade DBSCAN (lignes puis mots), score ARI, historique d'exploration en 3D.
+- **Avec vérité terrain** : DBSCAN (lignes puis mots), score ARI, historique d'exploration en 3D.
 - **Sans vérité terrain** : DBSCAN simple sur `(X, Y)`, résumé automatique du clustering, sans score puisqu'il n'y a rien à comparer.
 
 ## Charger un fichier
