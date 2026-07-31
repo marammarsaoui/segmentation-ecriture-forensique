@@ -46,7 +46,7 @@ Pipeline DBSCAN à deux passes :
 2. **Passe 2 (X)**: détection des mots à l'intérieur de chaque ligne
 3. **Switch temporel** (`cascade_XN`): activé si l'ARI spatial descend sous 0,80
 
-*Remarque :* Des guides complémentaires pourront être ajoutés dans certains sous-répertoires lorsque leur fonctionnement nécessite des explications plus détaillées. Dans les autres cas, les consignes générales de ce README s’appliquent.
+*Remarque :* Des guides complémentaires pourront être ajoutés dans certains sous-répertoires lorsque leur fonctionnement nécessite des explications plus détaillées. Dans les autres cas, les consignes générales de des READMEs s’appliquent.
 
 ---
 
