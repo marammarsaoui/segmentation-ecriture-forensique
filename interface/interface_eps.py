@@ -1,52 +1,47 @@
 """
 ═══════════════════════════════════════════════════════════════════════
- CARTOUCHE
-═══════════════════════════════════════════════════════════════════════
+ CARTOUCHE:
  Fichier: interface_eps.py
+ 
+#   Code écrit et développé par Maram
+#   Merci de ne pas réutiliser sans autorisation
+
  Projet: Segmentation automatique de texte manuscrit en ligne
- Contexte: Stage M1 Mathématiques Appliquées - Ensimag / UGA
+ Contexte: Stage M1 Mathématiques Appliquées
  Rôle: Interface interactive (Streamlit) de la cascade DBSCAN,
                 pensée pour le réglage manuel exploratoire, à la différence
                 de grille_1d.py / grille_2d.py / run_all_scripteurs.py qui
                 font une recherche automatique en traitement par lot.
 
- ENTRÉES ATTENDUES
- ─────────────────────────────────────────────────────────────────────
+ ENTRÉES ATTENDUES:
  Un fichier JSON de tracé manuscrit, dans l'un des deux formats suivants :
-   Format A (with_BM) : liste de segments {"BM": ..., "Points": [...]},
+   Format A (with_BM): liste de segments {"BM": ..., "Points": [...]},
                          chaque point ayant au moins X, Y, N, Tip.
-   Format B (brut)    : liste plate de points {"X", "Y", "Segment", ...},
+   Format B (brut): liste plate de points {"X", "Y", "Segment", ...},
                          sans annotation de vérité terrain.
  La différence entre les deux est détectée automatiquement (voir _preparer,
  étape 1) et pilote tout le comportement de l'interface ensuite (le switch
  avec BM / sans BM, étapes 4 et 5).
 
- SORTIES PRODUITES
- ─────────────────────────────────────────────────────────────────────
-   outputs/scripteur_{N}/resultats_{N}.csv        résultats chiffrés
-   outputs/scripteur_{N}/export_ey..._ex....png    figures (mode avec BM)
-   outputs/scripteur_{N}/vis_dbscan_{N}.png        figure (mode sans BM)
-   outputs/scripteur_{N}/{N}_with_BM.json          nouvelle vérité terrain
+ SORTIES PRODUITES:
+   outputs/scripteur_{N}/resultats_{N}.csv : résultats chiffrés
+   outputs/scripteur_{N}/export_ey..._ex....png : figures (mode avec BM)
+   outputs/scripteur_{N}/vis_dbscan_{N}.png: figure (mode sans BM)
+   outputs/scripteur_{N}/{N}_with_BM.json :nouvelle vérité terrain
                                                     reconstruite à partir
                                                     des MotID trouvés
-   outputs/scripteur_{N}/trace3D_{N}.csv           historique d'exploration
-   outputs/journal.csv                             journal d'audit global,
-                                                    jamais écrasé, trace
-                                                    tous les exports de
-                                                    tous les scripteurs
+   outputs/scripteur_{N}/trace3D_{N}.csv : historique d'exploration
+   outputs/journal.csv :journal d'audit global, jamais écrasé, trace tous les exports de tous les scripteurs
 
- DÉPENDANCES
- ─────────────────────────────────────────────────────────────────────
+ DÉPENDANCES: 
  streamlit, numpy, pandas, matplotlib, scikit-learn (DBSCAN,
  adjusted_rand_score). Aucune dépendance à un autre fichier du dépôt :
  ce script est autonome.
 
- UTILISATION
- ─────────────────────────────────────────────────────────────────────
+ UTILISATION : 
    streamlit run interface_eps.py
 
- STRUCTURE DU FICHIER (dans l'ordre d'exécution)
- ─────────────────────────────────────────────────────────────────────
+ STRUCTURE DU FICHIER (dans l'ordre d'exécution) : 
    Étape 0a : robustesse - validation JSON, réparation, journal d'audit
    Étape 0b : source de données - fichier local ou upload
    Étape 0c : validation et réparation, appliquée à la source choisie
@@ -56,8 +51,7 @@
    Étape 4  : MODE AVEC BM - cascade eps_y/eps_x, ARI, historique 3D
    Étape 5  : MODE SANS BM - DBSCAN à plat, un seul eps, pas d'ARI
 
- POINTS D'ATTENTION POUR UN REPRENEUR
- ─────────────────────────────────────────────────────────────────────
+ POINTS D'ATTENTION POUR UN REPRENEUR :
  - La variable a_bm (calculée une seule fois, étape 1) est LA variable
    qui décide de tout le reste. Si elle est mal calculée, tout le
    comportement de l'interface en aval est faussé silencieusement.
@@ -67,17 +61,13 @@
    humain. Ne pas mélanger les deux conventions si le code est étendu.
  - Le mode "avec BM" n'a pas de switch temporel (contrairement à
    grille_2d.py / run_all_scripteurs.py qui basculent sur (X, Time_MS
-   normalisé) si l'ARI reste sous 0.80). Le réglage manuel via curseurs
-   n'atteint donc pas toujours l'ARI qu'une recherche exhaustive trouve ;
-   le bouton "Optimiser automatiquement" comble une partie de cet écart
-   en reproduisant la recherche par grille, mais reste purement spatial.
- - Piège Streamlit à connaître : on ne peut pas modifier
-   st.session_state["slider_eps_y"] après que le widget portant cette
-   clé a déjà été créé dans le MÊME passage du script (ça lève une
-   StreamlitAPIException, même si un st.rerun() suit juste derrière).
-   C'est pourquoi le bouton "Optimiser automatiquement" ne fait que
-   poser un drapeau (optimisation_demandee) puis relance ; le calcul
-   réel a lieu au tour suivant, avant la création des curseurs.
+   normalisé) si l'ARI reste sous 0.80). Le réglage des curseurs eps_y et
+   eps_x reste entièrement manuel dans cette interface : aucune recherche
+   automatique d'hyperparamètres n'y est intégrée, contrairement aux
+   scripts de traitement par lot du dépôt.
+ - Le bouton "Exporter nouveau JSON BM" n'existe que dans le mode sans
+   BM : en mode avec BM, une vérité terrain existe déjà, ce bouton n'a
+   donc pas d'utilité dans ce contexte.
 ═══════════════════════════════════════════════════════════════════════
 """
 
@@ -441,11 +431,13 @@ a_bm        = D["a_bm"]
 # c'est dans _preparer() qu'il faut chercher en premier, pas ici.
 # ─────────────────────────────────────────────────────────────────────
 if a_bm:
-    st.sidebar.markdown(f"**{len(data_filtre)} strokes · {len(coords)} points · "
-                        f"{n_bm_reels} BM réels**")
+    if source != "Upload JSON":
+        st.sidebar.markdown(f"**{len(data_filtre)} strokes · {len(coords)} points · "
+                            f"{n_bm_reels} BM réels**")
     st.info("Champ BM détecté → mode cascade avec vérité terrain et ARI.")
 else:
-    st.sidebar.markdown(f"**{len(data_filtre)} strokes · {len(coords)} points · pas de BM**")
+    if source != "Upload JSON":
+        st.sidebar.markdown(f"**{len(data_filtre)} strokes · {len(coords)} points · pas de BM**")
     st.info("Pas de champ BM détecté → mode simplifié, DBSCAN 2D sans vérité terrain.")
 
 
@@ -629,12 +621,16 @@ if a_bm:
 
     st.sidebar.markdown("---")
     st.sidebar.markdown("### Paramètres DBSCAN")
-    eps_y  = st.sidebar.slider("eps_y",  0.05, 1.00, 0.35, step=0.005, key="slider_eps_y")
-    eps_x  = st.sidebar.slider("eps_x",  0.10, 3.00, 1.30, step=0.05, key="slider_eps_x")
-    minS_y = st.sidebar.slider("minS_y", 1, 10, 3, step=1, key="slider_minS_y")
-    minS_x = st.sidebar.slider("minS_x", 1, 10, 3, step=1, key="slider_minS_x")
+    eps_y  = st.sidebar.slider("eps_y",  0.05, 1.00, 0.35, step=0.005)
+    eps_x  = st.sidebar.slider("eps_x",  0.10, 3.00, 1.30, step=0.05)
+    minS_y = st.sidebar.slider("minS_y", 1, 10, 3, step=1)
+    minS_x = st.sidebar.slider("minS_x", 1, 10, 3, step=1)
     st.sidebar.markdown("---")
-    mode_affichage = st.sidebar.radio("Afficher", ["MotID", "LigneID"])
+    # Le sélecteur MotID/LigneID a été retiré : la colonne du milieu (col2)
+    # affiche déjà les lignes en permanence, donc choisir "LigneID" ici
+    # aurait affiché deux fois la même information. La troisième colonne
+    # se consacre désormais toujours à MotID.
+    mode_affichage = "MotID"
 
     df, n_lignes, n_mots, ari = cascade(
         eps_y, eps_x, minS_y, minS_x, coords, coords_Y, N_liste, data_filtre,
@@ -654,13 +650,14 @@ if a_bm:
     if not st.session_state.historique or st.session_state.historique[-1] != point:
         st.session_state.historique.append(point)
 
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("ARI", f"{ari:.3f}")
     c2.metric("Mots détectés", f"{n_mots} / {n_bm_reels}")
     c3.metric("Lignes", n_lignes)
     c4.metric("Zone", zone)
+    c5.metric("Points explorés", len(st.session_state.historique))
 
-    def make_fig(df_plot, col_name, seed, titre):
+    def make_fig(df_plot, col_name, seed, titre, afficher_numeros=False):
         """
         Trace un tracé manuscrit coloré par la colonne col_name (BM,
         MotID ou LigneID selon l'appelant), un stroke à la fois, chaque
@@ -668,15 +665,44 @@ if a_bm:
         suit fidèlement le geste d'écriture, contrairement à un simple
         nuage de points). Utilisée pour les trois figures du mode avec BM
         (vérité terrain, lignes, mots).
+
+        Si afficher_numeros=True, un numéro de groupe (à partir de 1) est
+        affiché au-dessus de chaque groupe. Ajouté suite à un retour
+        utilisateur : le nombre annoncé dans les indicateurs (par exemple
+        "Lignes : 16") pouvait sembler ne pas correspondre à ce qui était
+        perçu visuellement (par exemple 6 rangées visibles), parce que
+        deux couleurs tirées au hasard peuvent se ressembler assez pour
+        que l'œil confonde deux groupes distincts en une seule rangée
+        (souvent une même ligne coupée en plusieurs morceaux par les
+        jambages des lettres). La numérotation permet de vérifier
+        directement sur la figure que le compte affiché est correct.
         """
         colors = gen_couleurs(set(df_plot[col_name].unique()), seed)
         fig, ax = plt.subplots(figsize=(7, 5))
+        points_par_groupe = {}
         for _, row in df_plot.iterrows():
             pts = row["Points"]
             Xp = [p["X"] for p in pts]; Yp = [p["Y"] for p in pts]
             col = colors.get(row[col_name], "#333333")
             ax.plot(Xp, Yp, color=col, linewidth=1.5)
             ax.scatter(Xp, Yp, color=col, s=3, alpha=0.5)
+            if afficher_numeros:
+                lab = row[col_name]
+                points_par_groupe.setdefault(lab, {"x": [], "y": []})
+                points_par_groupe[lab]["x"].extend(Xp)
+                points_par_groupe[lab]["y"].extend(Yp)
+
+        if afficher_numeros:
+            for lab, pts_groupe in points_par_groupe.items():
+                if lab == -1:
+                    continue
+                xs = np.array(pts_groupe["x"]); ys = np.array(pts_groupe["y"])
+                marge = (ys.max() - ys.min()) * 0.15 + 1
+                ax.annotate(str(int(lab) + 1), (xs.mean(), ys.max() + marge),
+                          fontsize=7, ha="center", va="bottom",
+                          bbox=dict(boxstyle="circle,pad=0.12", fc="white",
+                                   ec="gray", alpha=0.85))
+
         ax.set_title(titre, fontsize=10); ax.set_xlabel("X"); ax.set_ylabel("Y")
         fig.tight_layout()
         return fig
@@ -691,11 +717,12 @@ if a_bm:
         st.pyplot(fig_bm); plt.close(fig_bm)
     with col2:
         fig_lig = make_fig(df, "LigneID", 7,
-                           f"Lignes détectées - {n_lignes} lignes\neps_y={eps_y:.3f}")
+                           f"Lignes détectées - {n_lignes} lignes\neps_y={eps_y:.3f}",
+                           afficher_numeros=True)
         st.pyplot(fig_lig); plt.close(fig_lig)
     with col3:
         titre_res = f"{mode_affichage} - {n_mots}/{n_bm_reels} | ARI={ari:.3f} [{zone}]"
-        fig_res = make_fig(df, col_name, seed, titre_res)
+        fig_res = make_fig(df, col_name, seed, titre_res, afficher_numeros=True)
         st.pyplot(fig_res); plt.close(fig_res)
 
     if len(st.session_state.historique) >= 2:
@@ -730,7 +757,8 @@ if a_bm:
                 couleurs = np.arange(len(df_hist))
                 sc = ax3d.scatter(df_hist["eps_x"], df_hist["eps_y"], df_hist["ARI"],
                                   c=couleurs, cmap="viridis", s=40, alpha=0.8)
-                plt.colorbar(sc, ax=ax3d, shrink=0.5, label="Ordre d'exploration")
+                plt.colorbar(sc, ax=ax3d, shrink=0.5,
+                           label="Ordre d'exploration (violet = ancien, jaune = récent)")
             else:
                 sc = ax3d.scatter(df_hist["eps_x"], df_hist["eps_y"], df_hist["ARI"],
                                   c=df_hist["ARI"], cmap="RdYlGn", vmin=0, vmax=1, s=40, alpha=0.8)
@@ -741,7 +769,7 @@ if a_bm:
             ax3d.view_init(elev=elev, azim=azim)
             ax3d.set_xlabel("eps_x"); ax3d.set_ylabel("eps_y"); ax3d.set_zlabel("ARI")
             ax3d.set_zlim(0, 1.05)
-            ax3d.set_title(f"Nuage cumulé - {scripteur}", fontsize=10)
+            ax3d.set_title(f"Nuage cumulé - {len(df_hist)} pts - {scripteur}", fontsize=10)
             ax3d.legend(fontsize=8)
             fig3d.tight_layout(); st.pyplot(fig3d); plt.close(fig3d)
 
@@ -843,30 +871,6 @@ if a_bm:
         pd.DataFrame(st.session_state.historique).to_csv(nom_hist, index=False)
         return [nom_hist]
 
-    def export_json_bm(suffixe):
-        """
-        Construit un nouveau fichier _with_BM.json à partir des MotID trouvés
-        par la cascade : chaque MotID devient le nouveau BM (numéroté à partir
-        de 1, cohérent avec l'affichage). Les strokes classés bruit (MotID
-        == -1) sont marqués BM="P" (convention déjà utilisée pour exclure la
-        ponctuation), plutôt que d'être perdus silencieusement.
-        Le fichier produit peut être réutilisé comme entrée de grille_1d.py
-        ou grille_2d.py.
-        """
-        nouveaux_segments = []
-        for _, row in df.iterrows():
-            mot = row["MotID"]
-            nouveau_bm = str(int(mot) + 1) if mot != -1 else "P"
-            pts_propres = [{k: v for k, v in p.items()
-                           if k not in ("LigneID", "MotID")}
-                          for p in row["Points"]]
-            nouveaux_segments.append({"BM": nouveau_bm, "Points": pts_propres})
-
-        nom_json = f"{out}/{scripteur}_with_BM{suffixe}.json"
-        with open(nom_json, "w", encoding="utf-8") as f:
-            json.dump(nouveaux_segments, f, ensure_ascii=False, indent=2)
-        return [nom_json]
-
     def export_sauvegarde_figures(suffixe):
         """
         Variante à deux panneaux (BM réels + résultat courant) de
@@ -893,8 +897,6 @@ if a_bm:
 
     exporter_avec_confirmation("figures_png", out, export_figures_png, "Exporter figures PNG")
     exporter_avec_confirmation("csv_resultats", out, export_csv_resultats, "Exporter CSV résultats")
-    exporter_avec_confirmation("json_bm", out, export_json_bm,
-                               "Exporter nouveau JSON BM")
 
     st.sidebar.markdown("---")
     if st.sidebar.button("Exporter trace 3D (CSV)"):
@@ -917,8 +919,10 @@ if a_bm:
 #   - pas de cascade Y puis X (un seul DBSCAN sur (X, Y) ensemble) ;
 #   - pas d'ARI ni de zone (sur/sous-regroupement) : nécessitent une
 #     vérité terrain à comparer, qui n'existe pas ici ;
-#   - pas d'historique 3D ni de bouton "Optimiser automatiquement" :
-#     ces deux s'appuient sur l'ARI comme critère à maximiser.
+#   - pas d'historique 3D : s'appuie sur l'ARI comme critère à tracer,
+#     absent ici. En revanche, l'export d'un nouveau JSON BM (voir
+#     export_json_bm_brut plus bas) reste disponible, spécifiquement
+#     pour ce mode.
 
 else:
 
@@ -985,5 +989,36 @@ else:
                          empreinte_source)
         return [nom_csv]
 
+    def export_json_bm_brut(suffixe):
+        """
+        Équivalent de export_json_bm() (mode avec BM) pour le mode sans
+        BM : construit un nouveau fichier _with_BM.json à partir des
+        clusters DBSCAN trouvés, pour permettre de créer une première
+        vérité terrain même en partant d'un fichier brut sans annotation.
+
+        Différence avec la version "avec BM" : ici labels_dbscan est
+        indexé par point (pas déjà agrégé par stroke dans un DataFrame),
+        donc on refait la même jointure par N et le même vote majoritaire
+        que cascade() effectue en interne, avant de reconstruire les
+        segments.
+        """
+        N_to_label = {N_liste[i]: int(labels_dbscan[i]) for i in range(len(N_liste))}
+
+        nouveaux_segments = []
+        for seg in data_filtre:
+            labels_seg = [N_to_label.get(p.get("N", p.get("n")), -1)
+                          for p in seg["Points"]]
+            label_seg = Counter(labels_seg).most_common(1)[0][0]
+            nouveau_bm = str(label_seg + 1) if label_seg != -1 else "P"
+            pts_propres = [dict(p) for p in seg["Points"]]
+            nouveaux_segments.append({"BM": nouveau_bm, "Points": pts_propres})
+
+        nom_json = f"{out}/{scripteur}_with_BM{suffixe}.json"
+        with open(nom_json, "w", encoding="utf-8") as f:
+            json.dump(nouveaux_segments, f, ensure_ascii=False, indent=2)
+        return [nom_json]
+
     exporter_avec_confirmation("figure_brut", out, export_figure_brut, "Exporter figure PNG")
     exporter_avec_confirmation("csv_brut", out, export_csv_brut, "Exporter CSV résultats")
+    exporter_avec_confirmation("json_bm_brut", out, export_json_bm_brut,
+                               "Exporter nouveau JSON BM")
