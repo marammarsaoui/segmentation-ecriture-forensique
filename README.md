@@ -18,7 +18,11 @@ Interface de classification non supervisée (DBSCAN) pour la segmentation d'écr
 | `data/` | `rangement/`, `json_bm/`, `modified/`-fichiers JSON de tracés stylet par scripteur |
 
 > Les dossiers `data/rangement/`, `data/BM200/` et `data/modified/` contiennent les tracés complets de scripteurs identifiés. 
+## Données
 
+Les dossiers de données bruts (`json_bm/`, `modified/`, `rangement/`) ne sont **pas inclus** dans ce dépôt : ils contiennent des données d'acquisition qui seront rendues disponibles dans un futur article publié par l'équipe de recherche à l'origine de ce projet.
+
+Pour tester l'interface sans ces dossiers, un fichier d'exemple est mis à disposition directement dans `interface/` : il suffit de le charger via le mode « Upload JSON » de l'interface, sans avoir besoin d'accéder aux dossiers de données du dépôt.
 ---
 
 ## Installation
