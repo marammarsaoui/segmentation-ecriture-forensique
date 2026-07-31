@@ -18,7 +18,7 @@ Deux sources sont proposées, choisies dans la barre latérale.
   <img src="upload_file.jpg" width="30%" alt="Upload d'un fichier JSON">
 </p>
 
-À gauche : un fichier déjà rangé dans `json_bm/`, sélectionné dans un menu déroulant. À droite : un fichier déposé ponctuellement par upload — l'interface prévient ici que le fichier est volumineux (12.8 Mo) et détecte l'absence de champ `BM`.
+À gauche : un fichier déjà rangé dans `json_bm/`, sélectionné dans un menu déroulant. À droite : un fichier déposé ponctuellement par upload l'interface prévient ici que le fichier est volumineux (12.8 Mo) et détecte l'absence de champ `BM`.
 
 ## Le résultat, mode avec vérité terrain
 
