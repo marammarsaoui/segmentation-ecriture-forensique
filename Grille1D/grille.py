@@ -1,3 +1,8 @@
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import sys
 import json
 import random
