@@ -1,6 +1,8 @@
 """
 -----------------------------------------------------------------
  grille_2d.py
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
  OBJECTIF : 
  Recherche automatique des hyperparamètres optimaux (eps_y, eps_x)
  de la cascade DBSCAN pour segmenter un texte manuscrit en mots.
