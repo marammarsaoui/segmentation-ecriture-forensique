@@ -1,6 +1,10 @@
 """
 =========================================================================
  CARTOUCHE:
+ # 
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# 
  Fichier: lire_le_dossier_JSON_automatiquement.py
  Projet: Segmentation automatique de texte manuscrit en ligne
  Rôle: Compare les scripteurs présents dans les trois dossiers de
