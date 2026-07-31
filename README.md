@@ -17,7 +17,7 @@ Interface de classification non supervisée (DBSCAN) pour la segmentation d'écr
 | `docs/` | Guides utilisateur (Windows/macOS/Linux), notes sur la dimension temporelle |
 | `data/` | `rangement/`, `json_bm/`, `modified/`-fichiers JSON de tracés stylet par scripteur |
 
-> Les dossiers `data/rangement/`, `data/BM200/` et `data/modified/` contiennent les tracés complets de scripteurs identifiés. 
+> Les dossiers `data/rangement/`, `data/json_bm` et `data/modified/` contiennent les tracés complets de scripteurs identifiés. 
 ## Données
 
 Les dossiers de données bruts (`json_bm/`, `modified/`, `rangement/`) ne sont **pas inclus** dans ce dépôt : ils contiennent des données d'acquisition qui seront rendues disponibles dans un futur article publié par l'équipe de recherche à l'origine de ce projet.
