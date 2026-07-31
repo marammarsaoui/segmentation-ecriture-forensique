@@ -2,6 +2,10 @@
 =========================================================================
  CARTOUCHE:
  Fichier: counter.py
+ # 
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# 
  Projet: Segmentation automatique de texte manuscrit en ligne
  Rôle: Script de diagnostic pour un seul scripteur (203). Compte le
        nombre d'occurrences de chaque label BM dans json_bm/, ce qui
