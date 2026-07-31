@@ -1,6 +1,9 @@
 """
 run_all_scripteurs.py
-─────────────────────
+#
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# 
 Lance grille_2d.py sur tous les fichiers JSON du dossier json_bm/,
 en séquentiel. Les résultats de chaque scripteur sont sauvegardés
 dans outputs/scripteur_{N}/ comme d'habitude.
