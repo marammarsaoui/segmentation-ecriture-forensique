@@ -2,6 +2,10 @@
 =========================================================================
  CARTOUCHE:
  Fichier: JSON_show_first_stroke_of_txt.py
+ # 
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# 
  Projet: Segmentation automatique de texte manuscrit en ligne
  Rôle: Script le plus élémentaire du dépôt. Lit un seul scripteur (203),
        trace une ligne noire continue à partir de ses points, et
