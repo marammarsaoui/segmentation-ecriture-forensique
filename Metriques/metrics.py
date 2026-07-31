@@ -1,5 +1,9 @@
 """
- cascade_metriques.py
+ metriques.py
+ # 
+#   Code écrit et développé par Maram Marsaoui (marammarsaoui28@gmail.com)
+#   Dans le cadre du stage de M1 avec Monsieur Vincent Brault et Madame Fanny Guillet 
+# 
  OBJECTIF: 
  Comparer 4 métriques de distance (euclidean, manhattan, chebyshev,
  minkowski p=3) pour la passe 2 de la cascade DBSCAN.
