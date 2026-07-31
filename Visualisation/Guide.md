@@ -1,4 +1,4 @@
-# Guide — Lecture et tracé du JSON benchmarké
+# Guide: Lecture et tracé du JSON benchmarké
 
 Ce guide détaille les sept scripts du dossier, dans l'ordre logique de leur rôle : du plus élémentaire (lecture d'un seul scripteur) au plus abouti (comparaison colorée par mot sur trois dossiers entiers).
 
@@ -67,7 +67,7 @@ Isole et trace uniquement les segments marqués `BM == "P"` (la convention du d�
 
 **Ce que la figure révèle.** Les traits `"P"` ne sont pas concentrés à un seul endroit du texte : ils apparaissent dispersés à des positions variées, avec des tailles très différentes (certains ne sont qu'un point isolé, d'autres de courts traits courbes). Cette dispersion suggère que `BM == "P"` capture un mélange de vraie ponctuation et de bruit d'acquisition (micro-gestes du stylet, hésitations), pas seulement les signes de ponctuation attendus , à garder en tête avant de filtrer ces segments sans les avoir inspectés, puisque le filtre `BM != "P"` est utilisé systématiquement dans tous les scripts `grille_*.py`.
 
-Détail technique : ce script est le seul du groupe à utiliser `plt.gca().invert_yaxis()` (nécessaire car l'axe Y de la tablette compte de haut en bas). Les autres scripts de tracé ne l'utilisent pas — à harmoniser si les figures doivent être comparées entre elles.
+Détail technique : ce script est le seul du groupe à utiliser `plt.gca().invert_yaxis()` (nécessaire car l'axe Y de la tablette compte de haut en bas). Les autres scripts de tracé ne l'utilisent pas  à harmoniser si les figures doivent être comparées entre elles.
 
 ### 7. `tracer_txt.py` : tracé d'un résultat déjà segmenté
 
