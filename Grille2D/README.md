@@ -27,7 +27,7 @@ Applique la même recherche à chaque fichier `*_with_BM.json` d'un dossier, pro
 
 `grille_2d.py` ne teste que l'espace spatial `(X, Y)` : la recherche s'arrête là où elle en est, sans recours si l'ARI reste faible. `run_all_scripteurs.py`, lui, inclut un **switch temporel** : si l'ARI spatial reste sous 0.80 pour un scripteur donné, la recherche est relancée dans un espace `(X, Time_MS normalisé)`, et le meilleur des deux résultats est conservé.
 
-Ce n'est pas un oubli dans `grille_2d.py` — c'est cohérent avec son usage : un script d'exploration ponctuelle, où l'utilisateur peut inspecter visuellement le résultat et décider lui-même s'il faut aller plus loin. Le switch automatique a plus de sens dans `run_all_scripteurs.py`, pensé pour tourner sans supervision sur des dizaines de fichiers, où il faut une décision automatique plutôt qu'une inspection manuelle à chaque cas.
+Ce n'est pas un oubli dans `grille_2d.py` c'est cohérent avec son usage : un script d'exploration ponctuelle, où l'utilisateur peut inspecter visuellement le résultat et décider lui-même s'il faut aller plus loin. Le switch automatique a plus de sens dans `run_all_scripteurs.py`, pensé pour tourner sans supervision sur des dizaines de fichiers, où il faut une décision automatique plutôt qu'une inspection manuelle à chaque cas.
 
 ## Dépendances
 
