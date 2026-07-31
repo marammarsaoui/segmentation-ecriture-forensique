@@ -1,6 +1,6 @@
 # Segmentation d'écriture manuscrite en ligne
 
-Interface de classification non supervisée (DBSCAN) pour la segmentation d'écriture manuscrite en ligne, exploration du paramètre eps. Stage de M1 (M1 Mathématiques Appliquées) au **LJK (Laboratoire Jean Kuntzmann)** et la **police scientifique de Lyon**.
+Interface de classification non supervisée (DBSCAN) pour la segmentation d'écriture manuscrite en ligne, exploration du paramètre eps. Stage de M1 (M1 Mathématiques Appliquées) avec monsieur Vincent Brault au sein du **LJK (Laboratoire Jean Kuntzmann)** et madame Fanny Guillet à la **police scientifique de Lyon**.
 
 **Site vitrine :** 
 
