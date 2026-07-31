@@ -24,7 +24,7 @@ Interface de classification non supervisée (DBSCAN) pour la segmentation d'écr
 ## Installation
 
 ```bash
-git clone https://github.com/TON-USERNAME/segmentation-manuscrite.git
+git clone https://github.com/marammarsaoui/segmentation-manuscrite.git
 cd segmentation-manuscrite
 pip install -r requirements.txt
 ```
