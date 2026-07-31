@@ -2,7 +2,6 @@
 
 Interface de classification non supervisée (DBSCAN) pour la segmentation d'écriture manuscrite en ligne, exploration du paramètre eps. Stage de M1 (M1 Mathématiques Appliquées) avec monsieur [Vincent Brault](https://www.linkedin.com/in/vincent-brault-913a186b/) au sein du **LJK (Laboratoire Jean Kuntzmann)** et madame [Fanny Guillet](https://www.linkedin.com/in/fanny-guillet-5a0b59180/) à la **police scientifique de Lyon**.
 
-**Site vitrine :** [segmentation-ecriture-forensique](https://marammarsaoui.github.io/segmentation-ecriture-forensique/)
 ---
 
 ## Structure du dépôt
