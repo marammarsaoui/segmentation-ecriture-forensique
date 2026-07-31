@@ -41,7 +41,7 @@ streamlit run interface/interface_eps.py
 
 ## Documentation
 
-Le guide utilisateur complet est dans [`docs/guide_utilisateur.md`](docs/guide_utilisateur.md), avec des variantes par système d'exploitation dans le même dossier.
+Le guide utilisateur complet est dans [`docs/guide_utilisateur.md`](docs/Guide_interface.md), avec des variantes par système d'exploitation dans le même dossier.
 
 ##Méthode
 
