@@ -2,7 +2,7 @@
 
 Interface de classification non supervisée (DBSCAN) pour la segmentation d'écriture manuscrite en ligne, exploration du paramètre eps. Stage de M1 (M1 Mathématiques Appliquées) au **LJK (Laboratoire Jean Kuntzmann)** et la **police scientifique de Lyon**.
 
-**Site vitrine :** `https://TON-USERNAME.github.io/segmentation-manuscrite/`
+**Site vitrine :** `https://marammarsaoui.github.io/segmentation-manuscrite/`
 
 ---
 
