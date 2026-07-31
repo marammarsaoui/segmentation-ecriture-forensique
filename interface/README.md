@@ -21,4 +21,4 @@ Un seul fichier, `interface_eps.py`, autonome. Elle détecte automatiquement si 
 streamlit run interface_eps.py
 ```
 
-Le détail complet — architecture, logique du switch, cascade, robustesse, pseudo-code annoté — est dans [`Guide_interface.md`](./Guide_interface.md).
+Le détail completarchitecture, logique du switch,, robustesse, pseudo-code annoté est dans [`Guide_interface.md`](./Guide_interface.md).
