@@ -21,4 +21,4 @@ Un seul fichier, `interface_eps.py`, autonome. Elle détecte automatiquement si 
 streamlit run interface_eps.py
 ```
 Pour tester rapidement sans dossier de données personnel, utilisez le fichier d'exemple fourni : TXT_Jules_Verne.json, à charger via le mode « Upload JSON » de l'interface.
-Le détail completarchitecture, logique du switch,, robustesse, pseudo-code annoté est dans [`Guide_interface.md`](./Guide_interface.md).
+Le détail completarchitecture, logique du switch,, robustesse, pseudo-code annoté est dans [`Guide_interface.md`](./Guide_interface.pdf).
