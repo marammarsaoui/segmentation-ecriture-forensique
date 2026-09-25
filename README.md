@@ -41,7 +41,7 @@ streamlit run interface/interface_eps.py
 
 Le guide utilisateur complet est dans [`docs/guide_utilisateur.pdf`](interface/Guide_interface.pdf), avec des variantes par système d'exploitation dans le même dossier.
 
-##Méthode
+## Méthode
 
 Pipeline DBSCAN à deux passes :
 1. **Passe 1 (Y)**: détection des lignes d'écriture
